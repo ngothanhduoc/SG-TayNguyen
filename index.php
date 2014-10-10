@@ -1,176 +1,207 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <meta charset="utf-8">
-        <title>Portal Template</title>
-        <meta name="generator" content="Bootply" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <!--[if lt IE 9]>
-                <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+<?php
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+ini_set("display_errors", true);
+session_start();
+/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ *
+ */
+	define('ENVIRONMENT', 'development');
+/*
+ *---------------------------------------------------------------
+ * ERROR REPORTING
+ *---------------------------------------------------------------
+ *
+ * Different environments will require different levels of error reporting.
+ * By default development will show errors but testing and live will hide them.
+ */
 
-        <link rel="stylesheet" href="/assets/css/reset.css" rel="stylesheet">
-        <link rel="stylesheet" href="/assets/css/animate.css" rel="stylesheet">
-        <link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css"/>
-        <link rel="stylesheet" href="/assets/css/half-slider.css" type="text/css"/>
-        <link rel="stylesheet" href="/assets/css/styles.css" rel="stylesheet">
+if (defined('ENVIRONMENT'))
+{
+	switch (ENVIRONMENT)
+	{
+		case 'development':
+			error_reporting(E_ALL);
+		break;
+	
+		case 'testing':
+		case 'production':
+			error_reporting(0);
+		break;
+
+		default:
+			exit('The application environment is not set correctly.');
+	}
+}
+
+/*
+ *---------------------------------------------------------------
+ * SYSTEM FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" folder.
+ * Include the path if the folder is not in the same  directory
+ * as this file.
+ *
+ */
+	$system_path = './system';
+
+/*
+ *---------------------------------------------------------------
+ * APPLICATION FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * If you want this front controller to use a different "application"
+ * folder then the default one you can set its name here. The folder
+ * can also be renamed or relocated anywhere on your server.  If
+ * you do, use a full server path. For more info please see the user guide:
+ * http://codeigniter.com/user_guide/general/managing_apps.html
+ *
+ * NO TRAILING SLASH!
+ *
+ */
+	$application_folder = './application';
+
+/*
+ * --------------------------------------------------------------------
+ * DEFAULT CONTROLLER
+ * --------------------------------------------------------------------
+ *
+ * Normally you will set your default controller in the routes.php file.
+ * You can, however, force a custom routing by hard-coding a
+ * specific controller class/function here.  For most applications, you
+ * WILL NOT set your routing here, but it's an option for those
+ * special instances where you might want to override the standard
+ * routing in a specific front controller that shares a common CI installation.
+ *
+ * IMPORTANT:  If you set the routing here, NO OTHER controller will be
+ * callable. In essence, this preference limits your application to ONE
+ * specific controller.  Leave the function name blank if you need
+ * to call functions dynamically via the URI.
+ *
+ * Un-comment the $routing array below to use this feature
+ *
+ */
+	// The directory name, relative to the "controllers" folder.  Leave blank
+	// if your controller is not in a sub-folder within the "controllers" folder
+	// $routing['directory'] = '';
+
+	// The controller class file name.  Example:  Mycontroller
+	// $routing['controller'] = '';
+
+	// The controller function you wish to be called.
+	// $routing['function']	= '';
 
 
-    </head>
-    <body>
+/*
+ * -------------------------------------------------------------------
+ *  CUSTOM CONFIG VALUES
+ * -------------------------------------------------------------------
+ *
+ * The $assign_to_config array below will be passed dynamically to the
+ * config class when initialized. This allows you to set custom config
+ * items or override any default config values found in the config.php file.
+ * This can be handy as it permits you to share one application between
+ * multiple front controller files, with each file containing different
+ * config values.
+ *
+ * Un-comment the $assign_to_config array below to use this feature
+ *
+ */
+	// $assign_to_config['name_of_config_item'] = 'value of config item';
 
-        <div class="header">
-            <div class="header-main">
-                <div class="logo"><img class="animated slideInLeft" src="/assets/images/logo.png" /></div>
-                <div class="animated slideInDown slogan">Công Ty TNHH SÀI GÒN - TÂY NGUYÊN</div>
-            </div>
-        </div>
-        <!-- Half Page Image Background Carousel Header -->
-        <div id="myCarousel" class="carousel slide">
-            <!-- Indicators -->
 
-            <!-- Wrapper for Slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <!-- Set the first background image using inline CSS below. -->
-                    <div class="fill" style="background-image:url('/assets/images/wallpaper-1114115.jpg');"></div>
-                    <div class="carousel-caption">
-                        <h2>Caption 1</h2>
-                    </div>
-                </div>
-                <div class="item">
-                    <!-- Set the second background image using inline CSS below. -->
-                    <div class="fill" style="background-image:url('/assets/images/wallpaper-1149323.jpg');"></div>
-                    <div class="carousel-caption">
-                        <h2>Caption 2</h2>
-                    </div>
-                </div>
-                <div class="item">
-                    <!-- Set the third background image using inline CSS below. -->
-                    <div class="fill" style="background-image:url('/assets/images/wallpaper-1149592.jpg');"></div>
-                    <div class="carousel-caption">
-                        <h2>Caption 3</h2>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Controls -->
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <span class="icon-prev"></span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <span class="icon-next"></span>
-            </a>
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
 
-        </div>
-        <div class="container-fluid">
+/*
+ * ---------------------------------------------------------------
+ *  Resolve the system path for increased reliability
+ * ---------------------------------------------------------------
+ */
 
-            <!--left-->
-            <div class="col-sm-3">
+	// Set the current directory correctly for CLI requests
+	if (defined('STDIN'))
+	{
+		chdir(dirname(__FILE__));
+	}
 
-                <div class="panel panel-default">
-                    <a href="trang-chu.html"><div class="panel-heading menu active">Trang Chủ</div></a>
-                    <a href="gioi-thieu.html"><div class="panel-heading menu">Giới Thiệu</div></a>
-                    <a href="san-pham.html"><div class="panel-heading menu">Sản Phẩm</div></a>
-                    <a href="tin-tuc-su-kien.html"><div class="panel-heading menu">Tin Tức - Sự Kiện</div></a>
-                    <a href="tu-van-hoi-dap.html"><div class="panel-heading menu">Tư Vấn - Hỏi Đáp</div></a>
+	if (realpath($system_path) !== FALSE)
+	{
+		$system_path = realpath($system_path).'/';
+	}
 
-                </div>
-                <hr>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Hổ trợ trực tuyến</div>
-                    <div class="panel-body">Content here..</div>
-                </div>
-                <hr>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Hình ảnh công ty</div>
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-                        Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-                        dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-                        Aliquam in felis sit amet augue.</div>
-                </div>
-                
-            </div><!--/left-->
+	// ensure there's a trailing slash
+	$system_path = rtrim($system_path, '/').'/';
 
-            <!--center-->
-            <div class="col-sm-6">
-                
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h2>Lời Giới Thiệu</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-                            Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-                            dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-                            Aliquam in felis sit amet augue.</p>
-                        
-                    </div>
-                </div>
-                <hr>      
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h2>Sản Phẩm Tiêu Biểu</h2>
-                        <div class="list-product">
-                            <?php 
-                                for ($i=1; $i <= 10; $i++){
-                            ?>
-                            <div class="product">
-                                
-                            </div>
-                            <?php
-                                }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-            </div><!--/center-->
+	// Is the system path correct?
+	if ( ! is_dir($system_path))
+	{
+		exit("Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
+	}
 
-            <!--right-->
-            <div class="col-sm-3">
+/*
+ * -------------------------------------------------------------------
+ *  Now that we know the path, set the main path constants
+ * -------------------------------------------------------------------
+ */
+	// The name of THIS file
+	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Tin tức - sự kiện</div>
-                    <div class="panel-body">Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-                        Aliquam in felis sit amet augue.</div>
-                </div>
-                <hr>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Đối tác</div>
-                    <div class="panel-body">Content here..</div>
-                </div>
-                
-                
-            </div><!--/right-->
-            <hr>
-        </div><!--/container-fluid-->
-        <!-- Footer -->
-        <footer>
-            <div class="footer-main">
-                <div class="footer-navi">
-                    <ul>
-                        <a href="trang-chu.html"><li>Trang Chủ</li></a>
-                        <a href="gioi-thieu.html"><li >Giới Thiệu</li></a>
-                        <a href="san-pham.html"><li >Sản Phẩm</li></a>
-                        <a href="tin-tuc-su-kien.html"><li >Tin Tức - Sự Kiện</li></a>
-                        <a href="tu-van-hoi-dap.html"><li id="last">Tư Vấn - Hỏi Đáp</li></a>
-                    </ul>
-                </div>
-                <div class="footer-info">
-                    <span>Công Ty TNHH SÀI GÒN - TÂY NGUYÊN</span><br/>
-                    <span>Địa Chỉ: 204/13 Nguyễn Oanh, P.17, Q.Gò Vấp, TP.HCM</span><br/>
-                    <span>Tel: (08) 3895 2279 &nbsp;&nbsp; - &nbsp;&nbsp; Fax: (08) 3895 1515</span><br/>
-                    <span>Mã số thuế: 0312 695 798</span><br/>
-                </div>
-            </div>
-        </footer>
-        <!-- script references -->
-        <script src="/assets/js/jquery-1.8.3.min.js"></script>
-        <script src="/assets/js/bootstrap.min.js"></script>
-        <script>
-            $('.carousel').carousel({
-                interval: 5000 //changes the speed
-            })
-        </script>
-    </body>
-</html>
+	// The PHP file extension
+	// this global constant is deprecated.
+	define('EXT', '.php');
+
+	// Path to the system folder
+	define('BASEPATH', str_replace("\\", "/", $system_path));
+
+	// Path to the front controller (this file)
+	define('FCPATH', str_replace(SELF, '', __FILE__));
+
+	// Name of the "system folder"
+	define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
+
+
+	// The path to the "application" folder
+	if (is_dir($application_folder))
+	{
+		define('APPPATH', $application_folder.'/');
+	}
+	else
+	{
+		if ( ! is_dir(BASEPATH.$application_folder.'/'))
+		{
+			exit("Your application folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
+		}
+
+		define('APPPATH', BASEPATH.$application_folder.'/');
+	}
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ *
+ */
+require_once BASEPATH.'core/CodeIgniter.php';
+
+/* End of file index.php */
+/* Location: ./index.php */

@@ -1,0 +1,149 @@
+/*!
+ * jQuery UI Dialog 1.9.2
+ * http://jqueryui.com
+ *
+ * Copyright 2012 jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Dialog#theming
+ */
+.ui-dialog { position: absolute; top: 0; left: 0; padding: .2em; width: 300px; /*overflow: hidden;*/ }
+.ui-dialog .ui-dialog-titlebar { padding: .4em 1em; position: relative;  }
+.ui-dialog .ui-dialog-title { float: left; margin: .1em 16px .1em 0; }
+.ui-dialog .ui-dialog-titlebar-close { position: absolute; right: .3em; top: 50%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 18px; }
+.ui-dialog .ui-dialog-titlebar-close span { display: block; margin: 1px; }
+.ui-dialog .ui-dialog-titlebar-close:hover, .ui-dialog .ui-dialog-titlebar-close:focus { padding: 0; }
+.ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; /*background: none; overflow: auto;*/ zoom: 1; }
+.ui-dialog .ui-dialog-buttonpane { text-align: left; border-width: 1px 0 0 0; background-image: none; margin: .5em 0 0 0; padding: .3em 1em .5em .4em; }
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { float: right; }
+.ui-dialog .ui-dialog-buttonpane button { margin: .5em .4em .5em 0; cursor: pointer; }
+.ui-dialog .ui-resizable-se { width: 14px; height: 14px; right: 3px; bottom: 3px; }
+.ui-draggable .ui-dialog-titlebar { cursor: move; }
+
+.ui-dialog.ui-corner-all,.ui-dialog .ui-corner-all{
+    -moz-border-radius: 0px/*{cornerRadius}*/;
+    -webkit-border-radius: 0px/*{cornerRadius}*/;
+    border-radius: 0px/*{cornerRadius}*/;
+}
+.ui-dialog.ui-widget-content{
+    margin: 0;padding: 0;
+    min-width:240px;
+    background: #E8E8E8;
+    background: -moz-linear-gradient(top,white 0%,#EFEFEF 100%);
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,white),color-stop(100%,#EFEFEF));
+    background: -webkit-linear-gradient(top,white 0%,#EFEFEF 100%);
+    background: -o-linear-gradient(top,white 0%,#EFEFEF 100%);
+    background: -ms-linear-gradient(top,white 0%,#EFEFEF 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff',endColorstr='#efefef',GradientType=0 );
+    background: linear-gradient(to bottom,white 0%,#EFEFEF 100%);
+    border:none;
+    -moz-border-radius: 5px/*{cornerRadius}*/;
+    -webkit-border-radius: 5px/*{cornerRadius}*/;
+    border-radius: 5px/*{cornerRadius}*/;
+}
+.ui-dialog-buttonpane.ui-widget-content{
+/*    background: none;*/
+}
+.ui-dialog .ui-widget-header{
+    background:none;
+    border:none;
+    border-bottom: 1px solid #d7d7d7;
+}
+.ui-dialog .ui-dialog-titlebar{
+    padding: 8px 8px 8px 12px;
+    background: #fafafa;
+    background: -moz-linear-gradient(top,#fafafa 0%,#ebebeb 100%);
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#fafafa),color-stop(100%,#ebebeb));
+    background: -webkit-linear-gradient(top,#fafafa 0%,#ebebeb 100%);
+    background: -o-linear-gradient(top,#fafafa 0%,#ebebeb 100%);
+    background: -ms-linear-gradient(top,#fafafa 0%,#ebebeb 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa',endColorstr='#ebebeb',GradientType=0 );
+    background: linear-gradient(to bottom,#fafafa 0%,#ebebeb 100%);   
+	-moz-border-top-left-radius: 5px/*{cornerRadius}*/;
+	-moz-border-top-right-radius: 5px/*{cornerRadius}*/;
+	-webkit-border-top-left-radius: 5px/*{cornerRadius}*/;
+	-webkit-border-top-right-radius: 5px/*{cornerRadius}*/;
+	border-top-left-radius: 5px/*{cornerRadius}*/;	
+	border-top-right-radius: 5px/*{cornerRadius}*/;	
+}
+.ui-dialog .ui-dialog-buttonpane button{margin:4px 8px 4px 0px}
+.ui-dialog .ui-dialog-buttonpane{margin:0 0px;padding: 4px;border-top:1px solid #ddd;
+	-moz-border-bottom-left-radius: 5px/*{cornerRadius}*/;
+	-moz-border-bottom-right-radius: 5px/*{cornerRadius}*/;
+	-webkit-border-bottom-left-radius: 5px/*{cornerRadius}*/;
+	-webkit-border-bottom-right-radius: 5px/*{cornerRadius}*/;
+	border-bottom-left-radius: 5px/*{cornerRadius}*/;	
+	border-bottom-right-radius: 5px/*{cornerRadius}*/;	
+}
+.ui-dialog .ui-dialog-content{padding:4px;-max-width: 840px;max-height: 720px;}
+.ui-dialog .ui-button.ui-corner-all{
+    -moz-border-radius: 12px/*{cornerRadius}*/;
+    -webkit-border-radius: 12px/*{cornerRadius}*/;
+    border-radius: 12px/*{cornerRadius}*/;
+}
+.ui-dialog .ui-widget-header .ui-icon,.close-icon{
+    width: 9px;
+    height: 9px;
+    overflow: hidden;
+    display: block;
+    background: url('images/close.png') no-repeat center;
+    right: 0px;
+    top: 0px;
+}
+
+.ui-dialog-titlebar-close.ui-corner-all.ui-state-hover{border:none;background: none;}
+.ui-dialog-titlebar-close.ui-corner-all.ui-state-hover span{opacity: 1}
+.ui-dialog .ui-dialog-titlebar-close{
+    position: absolute;
+    right: .3em;
+    top: 50%;
+    width: 20px;
+    margin: -11px 0 0 0;
+    padding: 0px;
+    height: 20px;
+}
+.ui-dialog .ui-dialog-titlebar-close span{margin: 0}
+.ui-dialog .ui-widget-header .ui-icon{
+    height: 9px;
+    opacity: 1;
+    outline: 0;
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    width: 9px;
+}
+.ui-timepicker-div{font-size: 11px}
+.ui-dialog-buttonset button{
+        padding: 3px 12px 3px 12px;line-height: 16px;
+	border: 1px solid #d3d3d3/*{borderColorDefault}*/;
+	background: #e6e6e6/*{bgColorDefault}*/ url(images/ui-bg_glass_75_e6e6e6_1x400.png)/*{bgImgUrlDefault}*/ 50%/*{bgDefaultXPos}*/ 50%/*{bgDefaultYPos}*/ repeat-x/*{bgDefaultRepeat}*/;
+	font-weight: normal/*{fwDefault}*/;
+	color: #555555/*{fcDefault}*/;
+	background: #DADADA;
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#FAFAFA),to(#DADADA));
+	background-image: -moz-linear-gradient(top,#FAFAFA,#DADADA);
+	background-image: -o-linear-gradient(top,#FAFAFA,#DADADA);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#FAFAFA),color-stop(100%,#DADADA));
+	background: -ms-linear-gradient(top,#FAFAFA 0%,#DADADA 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FAFAFA',endColorstr='#DADADA',GradientType=0 );
+	background: linear-gradient(to bottom,#FAFAFA 0%,#DADADA 100%);
+	
+    -moz-border-radius: 12px/*{cornerRadius}*/;
+    -webkit-border-radius: 12px/*{cornerRadius}*/;
+    border-radius: 12px/*{cornerRadius}*/;
+}
+.ui-dialog-buttonset button:hover{
+	border: 1px solid #999999/*{borderColorHover}*/;
+	background: #dadada/*{bgColorHover}*/ url(images/ui-bg_glass_75_dadada_1x400.png)/*{bgImgUrlHover}*/ 50%/*{bgHoverXPos}*/ 50%/*{bgHoverYPos}*/ repeat-x/*{bgHoverRepeat}*/;
+	font-weight: normal/*{fwDefault}*/;
+	color: #212121/*{fcHover}*/;
+	background: #DADADA;
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#DADADA),to(#FAFAFA));
+	background-image: -moz-linear-gradient(top,#DADADA,#FAFAFA);
+	background-image: -o-linear-gradient(top,#DADADA,#FAFAFA);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#DADADA),color-stop(100%,#FAFAFA));
+	background: -ms-linear-gradient(top,#DADADA 0%,#FAFAFA 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#DADADA',endColorstr='#FAFAFA',GradientType=0 );
+	background: linear-gradient(to bottom,#DADADA 0%,#FAFAFA 100%);
+}

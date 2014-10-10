@@ -1,0 +1,220 @@
+/*
+Bootstrap 3.1 overrides from http://bootply.com
+
+This CSS code should follow the 'bootstrap.css'
+in your HTML file.
+
+license: MIT
+author: bootply.com
+*/
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+img{
+    border: none;
+}
+body {
+    background: url("../images/wallpaper.jpg") fixed;
+    background-attachment: fixed;
+    background-color: rgb(227, 235, 182);
+    background-size: cover;
+    background-position: 50% 0%;
+    background-repeat: no-repeat;
+}
+.header{
+    width: 100%;
+    height: 125px;
+}
+.container-fluid{
+    width: 1080px;
+    background: rgba(255, 255, 255, 0.84);
+    padding-top: 20px;
+}
+.header-main{
+    width: 1080px;
+    margin: auto;
+}
+.header-main .logo{
+    float: left;
+    margin-top: 10px;
+}
+.logo img{
+    width: 90px;
+}
+.slogan{
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 102px;
+    float: left;
+    margin-left: 40px;
+    color: #DD5C45;
+}
+.panel-heading {
+    color: #fff;
+    background-color: #0B438C;
+    border-color: #ddd;
+    font-weight: bold;
+    border-radius: none;
+}
+.menu{
+    border-radius: none;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    cursor: pointer;
+}
+.menu:first-child{
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+.menu:last-child{
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.menu:hover, .active{
+    background-color: #D9414E;
+}
+.active{
+    background-color: #D9414E !important;
+} 
+footer{
+    background-color: #032F3F;
+    height: 200px;
+    padding: 0px;
+    margin: 0px;
+    border-top: 1px solid #0658A8;
+}
+.footer-main{
+    margin: auto;
+    width: 1080px;
+    color: #fff;
+}
+.footer-main ul{
+    display: inline;
+    text-decoration: none;
+    list-style: none;
+}
+.footer-main ul li{
+    display: inline-block;
+    padding: 0px 10px 0px 10px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    border-right: 1px solid #fff;
+}
+
+.footer-main ul li:hover{
+    color: #D9414E;
+}
+.footer-navi{
+    text-align: center;
+    margin-top: 10px;
+}
+#last{
+    border: none;
+}
+.footer-info{
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 20px;
+}
+.list-product{
+    width: 100%;
+    float: left;
+    min-height: 100px;
+    margin-left: 8px;
+}
+.product ,.product-2{
+    background: #EDEDED;
+    height: 180px;
+    width: 235px;
+    float: left;
+    margin: 5px;
+    border: 1px solid #CDCDCD;
+    border-radius: 6px;
+    text-align: center;
+}
+.product-2{
+    height: 151px;
+    padding-top: 10px;
+}
+.product span{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-transform: capitalize;  
+    line-height: 28px;
+    font-weight: bold;
+}
+.product img{
+    height: 130px;
+    width: 233px;
+    border-radius: 5px 0px 0px;
+}
+.title-header{
+    margin-top: -14px;
+    border-left: 8px solid #FD7E13;
+    padding-left: 5px;
+    color: #A63F48;
+    font-weight: bold;
+    border-bottom: 1px solid #FD7E13;
+    margin-bottom: 10px;
+}
+.title-header h2{
+    margin-bottom: 2px;
+}
+.description-introduction{
+
+}
+.scroller-left, .scroller-right{
+    height: 370px;
+}
+.panel-body ul li img{
+    width: 200px;
+}
+.scroller-left div.simply-scroll-clip, .scroller-right div.simply-scroll-clip{
+    height: 340px;
+    width: 200px;
+}
+.scroller-left  .simply-scroll .simply-scroll-list li, .scroller-right  .simply-scroll .simply-scroll-list li{
+    width: 200px;
+    margin-bottom: 10px;
+}
+.yahoo{
+    text-align: center;
+    width: 200px;
+    margin-bottom: auto;
+}
+.yahoo img{
+    margin-bottom: 10px;
+}
+.scroller-right div.simply-scroll{
+    width: 200px;
+    height: 200px;
+    margin-bottom: 1em;
+    margin-left: -13px;
+    margin-top: -10px;
+}
+ul.news li{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-transform: capitalize;  
+}
+.contant-detail{
+    margin-top: 130px;
+    border-radius: 3px;
+    background: #ddd;
+    border: 1px solid #CDCDCD;
+    padding: 10px;
+}
+.name_product{
+    font-weight: bold;
+    font-size: 16px;
+    color: #0658A8;
+    margin-left: 10px;
+    text-transform: capitalize;
+}
