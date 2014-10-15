@@ -38,5 +38,17 @@ class M_home extends MY_Model {
         return $sql->result_array();
     }
     
+    function get_new($limit, $offset = ''){
+        $this->db_slave->select("*")
+                              ->from("news")
+                ;
+        $this->db_slave->order_by("id_news" , "DESC");
+        if($offset != "")
+            $this->db_slave->limit($limit, $offset);
+        else 
+            $this->db_slave->limit($limit);
+        $sql = $this->db_slave->get();
+        return $sql->result_array();
+    }
 
 }

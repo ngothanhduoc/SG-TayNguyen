@@ -166,8 +166,18 @@ footer{
 .title-header h2{
     margin-bottom: 2px;
 }
-.description-introduction{
-
+.description-introduction ul li{
+    margin-bottom: 10px;
+    border-bottom: 1px dotted #000;
+    padding-bottom: 10px;
+    min-height: 92px;
+}
+.description-introduction ul li img{
+    position: absolute;
+}
+.description-introduction ul li span{
+    display: block;
+    margin-left: 100px;
 }
 .scroller-left, .scroller-right{
     height: 370px;

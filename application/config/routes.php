@@ -48,7 +48,7 @@ $route['tin-tuc-su-kien.html']= "website/home/news";
 $route['tu-van-hoi-dap.html']= "website/home/anw";
 $route['ajax_product']= "website/home/ajax_product";
 $route['san-pham/(:any)']= "website/home/detail_product/$1";
-$route['tin-tuc/(:any)']= "website/home/detail-news/$1";
+$route['tin-tuc-su-kien/(:any)']= "website/home/detail_news/$1";
 
 
 /*--------End frontend------- */

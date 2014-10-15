@@ -3,9 +3,12 @@
         <div class="title-header"><h2>Tin Tức -Sự Kiện</h2></div>
         <div class="description-introduction">
             <ul>
-                <li>
-                    
-                </li>
+                <?php foreach ($data_news as $key => $value) {
+                    echo '<a href="/tin-tuc-su-kien/'.$value['id_news'].'-'.utf8_to_ascii($value['name']).'.html">';
+                    echo '<li><img  src="'.$value['image'].'" width="80px" height="80px"/> <span>'.$value['name'].'</span> <span>'.$value['create_time'].'</span> </li>';
+                    echo "</a>";
+                } ?>
+                
             </ul>
               
             

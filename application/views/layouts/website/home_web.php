@@ -48,9 +48,11 @@
                     <div class="panel-heading">Hổ trợ trực tuyến</div>
                     <div class="panel-body">
                         <div class="yahoo" >
-                            <img src='http://opi.yahoo.com/online?u=NICK_CUA_BAN&m=g&t=2'/><br/>
-                            <img src='http://opi.yahoo.com/online?u=NICK_CUA_BAN&m=g&t=2'/><br/>
-                            <img src='http://opi.yahoo.com/online?u=NICK_CUA_BAN&m=g&t=2'/><br/>
+                            <?php foreach ($contact as $key => $value) {
+                               echo "<img src='http://opi.yahoo.com/online?u=".$value['nick']."&m=g&t=2'/><br/>" ;
+                            }?>
+                            
+                            
                         </div>
 
                     </div>
@@ -60,12 +62,10 @@
                     <div class="panel-heading">Hình ảnh công ty</div>
                     <div class="panel-body scroller-left">
                         <ul id="scroller-left">
-                            <li><img src="http://logicbox.net/jquery/simplyscroll/assets/20080608_9N3H5GYL_tb.jpg" width="290" height="200" alt="Firehouse"></li>
-                            <li><img src="http://logicbox.net/jquery/simplyscroll/assets/20080513_4D3SD1BQ_tb.jpg" width="290" height="200" alt="Chloe nightclub"></li>
-                            <li><img src="http://logicbox.net/jquery/simplyscroll/assets/20080513_VPJWVQRW_tb.jpg" width="290" height="200" alt="Firehouse bar"></li>
-                            <li><img src="http://logicbox.net/jquery/simplyscroll/assets/20080514_B1YJ08B6_tb.jpg" width="290" height="200" alt="Firehouse chloe club fishtank"></li>
-                            <li><img src="http://logicbox.net/jquery/simplyscroll/assets/20080514_JYW68XPT_tb.jpg" width="290" height="200" alt="Firehouse restaurant"></li>
-                            <li><img src="http://logicbox.net/jquery/simplyscroll/assets/20080608_38CG51J2_tb.jpg" width="290" height="200" alt="Firehouse"></li>
+                            <?php foreach ($company as $key => $value) {
+                                echo '<li><img src="'.$value['image'].'" width="290" height="200" alt="'.$value['name'].'"></li>';
+                            }?>
+                            
                         </ul>
                     </div>
                 </div>
@@ -86,8 +86,10 @@
                     <div class="panel-heading">Tin tức - sự kiện</div>
                     <div class="panel-body">
                         <ul class="news">
-                            <a href="#"><li>Tin tức nông nghiệp</li></a>
-                            <a href="#" title=""><li>Tin tức Thông tin công nghệ Tin tức Thông tin công nghệ</li></a>
+                            <?php foreach ($news as $key => $value) {
+                                echo '<a href="/tin-tuc-su-kien/'.$value['id_news'].'-'.utf8_to_ascii($value['name']).'.html"><li>'.$value['name'].'</li></a>';
+                            }?>
+                            
                         </ul>
                     </div>
                 </div>
@@ -97,12 +99,9 @@
                     <div class="panel-body">
                         <div class="panel-body scroller-right">
                             <ul id="scroller-right">
-                                <li><img src="http://logicbox.net/jquery/simplyscroll/public/assets/20080608_9N3H5GYL_tb.jpg" width="290" height="200" alt="Firehouse"></li>
-                                <li><img src="http://logicbox.net/jquery/simplyscroll/public/assets/20080513_4D3SD1BQ_tb.jpg" width="290" height="200" alt="Chloe nightclub"></li>
-                                <li><img src="http://logicbox.net/jquery/simplyscroll/public/assets/20080513_VPJWVQRW_tb.jpg" width="290" height="200" alt="Firehouse bar"></li>
-                                <li><img src="http://logicbox.net/jquery/simplyscroll/public/assets/20080514_B1YJ08B6_tb.jpg" width="290" height="200" alt="Firehouse chloe club fishtank"></li>
-                                <li><img src="http://logicbox.net/jquery/simplyscroll/public/assets/20080514_JYW68XPT_tb.jpg" width="290" height="200" alt="Firehouse restaurant"></li>
-                                <li><img src="http://logicbox.net/jquery/simplyscroll/public/assets/20080608_38CG51J2_tb.jpg" width="290" height="200" alt="Firehouse"></li>
+                               <?php foreach ($partner as $key => $value) {
+                                echo '<li><img src="'.$value['image'].'" width="290" height="200" alt="'.$value['name'].'"></li>';
+                            }?>
                             </ul>
                         </div>
                     </div>

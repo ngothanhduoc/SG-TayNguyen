@@ -1201,7 +1201,7 @@ class Admin_Ajax extends MY_Controller {
                 $Id = $arrParam['id'];
 
                 $Params['image_small'] = $arrParam['image_small'];
-                $Params['image_big'] = $arrParam['image_big'];
+//                $Params['image_big'] = $arrParam['image_big'];
                 $Params['name'] = $arrParam['name'];
                 $Params['description'] = $arrParam['description'];
 

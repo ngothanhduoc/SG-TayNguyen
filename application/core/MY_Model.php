@@ -63,5 +63,8 @@ class MY_Model extends CI_Model {
 
     }
     
-
+    function get_where($table, $where){
+        $sql = $this->db_slave->get_where($table, $where);
+        return $sql->result_array();
+    }
 }

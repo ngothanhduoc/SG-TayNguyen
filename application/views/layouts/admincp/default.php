@@ -84,9 +84,9 @@
 
 </head>
    
-    <div id="alert" class="animated bounceInDown">
+<!--    <div id="alert" class="animated bounceInDown">
         <a href="/backend/contact/index"> <span>You have <span id="count-con"></span> message contact</span><br/> </a>
-    </div>
+    </div>-->
    
 <body class="withvernav">
 

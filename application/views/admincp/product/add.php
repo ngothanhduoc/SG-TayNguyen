@@ -47,15 +47,10 @@ div.uploader {
                 <p>
                     <label for="home_image">Image Small (215px x 128px)</label>
                     <span class="field">
-                        <input type="text" required="" placeholder="Click vào để chọn hình" id="image_small" name="image_small" class="mediuminput" value="<?php echo @$data['image_small']?>" onclick="openKCFinderByPath('#image_small', 'images')" readonly>
+                        <input type="text" required="required" placeholder="Click vào để chọn hình" id="image_small" name="image_small" class="mediuminput" value="<?php echo @$data['image_small']?>" onclick="openKCFinderByPath('#image_small', 'images')" readonly>
                     </span>
 		</p>
-                <p>
-                    <label for="home_image">Image Big (980px x 510px)</label>
-                    <span class="field">
-                        <input type="text" required="" placeholder="Click vào để chọn hình" id="image_big" name="image_big" class="mediuminput" value="<?php echo @$data['image_big']?>" onclick="openKCFinderByPath('#image_big', 'images')" readonly>
-                    </span>
-		</p>
+                
 				
 		<p class="stdformbutton">
 			<input id="txt_id" type="hidden" value="<?php echo @$data['id_product']?>" name="id">
