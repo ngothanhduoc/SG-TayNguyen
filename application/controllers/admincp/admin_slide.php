@@ -3,7 +3,7 @@ ini_set("display_errors", '1');
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Admin_home extends MY_Controller {
+class Admin_slide extends MY_Controller {
 
     protected $_arrParam;
 
@@ -29,7 +29,7 @@ class Admin_home extends MY_Controller {
 	$this->load->model('m_backend');
         $id = $this->input->get('id', TRUE);
         if(isset($id) && is_numeric($id)){
-            $rs = $this->m_backend->jqxGet('slide','id_slide',$id, "id_slide");
+            $rs = $this->m_backend->jqxGet('images','id_slide',$id, "id_slide");
             if(empty($rs) === FALSE){
                 $data['data'] = $rs;
             }

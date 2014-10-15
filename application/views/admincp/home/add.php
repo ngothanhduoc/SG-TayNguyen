@@ -35,13 +35,15 @@ div.uploader {
 		</p>
 				
 		<p>
-		<label for="fulltext" style="float: none">Content</label>
-		</p>
-		<p>
-		<textarea placeholder="" id="fulltext" name="description" class="mediuminput"><?php echo @$data['description']?></textarea>
-		</p>
-                <p>
                     <label for="home_image">Slide Image (980px x 510px)</label>
+                    <span class="field">
+                        <input type="radio" name="slide"value="company" /> Hình ảnh của Công Ty <br/>
+                        <input type="radio" name="slide" value="partner" /> Hình ảnh của Đối Tác
+                    </span>
+		</p>
+                
+                <p>
+                    <label for="home_image">Slide Image (200px x 200px)</label>
                     <span class="field">
                         <input type="text" required="" placeholder="Click vào để chọn hình" id="home_image" name="image" class="mediuminput" value="<?php echo @$data['image']?>" onclick="openKCFinderByPath('#home_image', 'images')" readonly>
                     </span>

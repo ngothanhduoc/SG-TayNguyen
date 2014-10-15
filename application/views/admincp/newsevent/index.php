@@ -1,5 +1,5 @@
 
-<script type="text/javascript" src="/admin/assets/js/backend/backend.newsevent.js"></script>
+<script type="text/javascript" src="/public/admin/assets/js/backend/backend.newsevent.js"></script>
 
 
 <div class="pageheader notab">

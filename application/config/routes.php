@@ -128,5 +128,7 @@ $route['backend/ajax/addproduct'] = "admincp/admin_ajax/addproduct";
 $route['backend/contact/index'] = "admincp/admin_contact/index";
 $route['backend/contact/detail'] = "admincp/admin_contact/detail";
 $route['backend/ajax/contact_count'] = "admincp/admin_ajax/contact_count";
+$route['backend/slide/index'] = "admincp/admin_slide/index";
+$route['backend/slide/add'] = "admincp/admin_slide/add";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -1,24 +1,24 @@
 $(document).ready(function() {
     //-- init element ----------------------------------------------------------
+    //BACKEND.loadCat();
     BACKEND.init();
 });
 
-
+var arrCat = [];
 var BACKEND = {
-    API_URL_LIST: '/backend/list/images',
-    AJAX_URL_DELETE: '/backend/ajax/delete/admin_slide/index/slide/id_slide',
-    AJAX_URL_UPDATE: '/backend/ajax/updatestatus/admin_slide/index/slide/id_slide',
-    
+    API_URL_LIST: '/backend/list/news',
+    AJAX_URL_DELETE: '/backend/deletenews/news',
+    AJAX_URL_UPDATE: '/backend/updatenews/news',
+    //API_URL_CAT: '/inside/ajax/get_list_cat/game_category',
+    API_URL_SORT: '/inside/ajax/updatesort/game',
     OBJ_GRID: null,
     dataAdapter: function() {
         //-- init grid view --------------------------------------------------------
         var source = {
             datatype: "jsonp",
             datafields: [
-                {name: 'id_slide', type: 'int'},
+                {name: 'id_news', type: 'int'},
                 {name: 'name', type: 'string'},
-                {name: 'type', type: 'description'},
-               
             ],
             url: BACKEND.API_URL_LIST,
             sort: function() {
@@ -30,16 +30,29 @@ var BACKEND = {
         };
 
         var dataAdapter = new $.jqx.dataAdapter(source, {
+            /*
+            formatData: function(data) {
+                $.extend(data, {
+                    featureClass: "P",
+                    style: "full",
+                    maxRows: 50,
+                    username: "jqwidgets"
+                });
+                return data;
+            }
+            */
+			//loadComplete: function (records) {
             beforeLoadComplete: function (records) {
-                var p = dataAdapter.pagenum;
-                var s = dataAdapter.pagesize;
-                var j = p*s;
-
-                for (var i = j; i < records.length; i++) {
-                    records[i].idCoppy = records[i].id_slide;
-                    records[i].idStatus = records[i].id_slide + ',' + records[i].status;
+				var p = dataAdapter.pagenum;
+				var s = dataAdapter.pagesize;
+				var j = p*s;
 				
-                };
+				for (var i = j; i < records.length; i++) {
+                                        records[i].idCoppy = records[i].id_news + ',' + records[i].sellmore;
+					records[i].idStatus = records[i].id_news + ',' + records[i].status;
+					
+					
+                                };
 				
                 return records;
             }
@@ -52,7 +65,7 @@ var BACKEND = {
         return '<div style="overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: left; margin:4px 2px 0px 4px;">' + index + '</div>';
     },
     toolscolumnrender: function(row, datafield, value) {
-        return '<div class="grid-tools"><a href="javascript:void(0)" onclick="BACKEND.gridEdit(' + value + ');return false;" class="grid-tools"><span class="ui-icon ui-icon-pencil"></span></a></div>';
+        return '<div class="grid-tools"><a href="javascript:void(0)" onclick="BACKEND.gridEdit(' + value + ');return false;" class="grid-tools"><span class="ui-icon ui-icon-pencil"></span></a><a href="javascript:void(0)" onclick="BACKEND.gridDelete(' + value + ');return false;"><span class="ui-icon ui-icon-trash"></span></a></div>';
     },
     rankingcolumnrender: function(row, datafield, value) {
         var res = value.split(",");
@@ -78,7 +91,7 @@ var BACKEND = {
 	statuscolumnrender: function(row, datafield, value) {
         var res = value.split(",");
         var str= '<a href="javascript:void(0)" onclick="BACKEND.desable(' + res[0] + ');"><span class="data-status enable" title="Đã kích hoạt">&nbsp;</span></a>';
-        if (res[1] == 'off') {
+        if (res[1] == 0) {
             str = '<a href="javascript:void(0)" onclick="BACKEND.enable(' + res[0] + ');"><span class="data-status disable" title="Chưa kích hoạt">&nbsp;</span></a>';
         }
         return str;
@@ -96,13 +109,12 @@ var BACKEND = {
             columnsresize: true,
             sortable: true,
             //theme: 'energyblue',
-            theme: 'office',
+			theme: 'office',
             //theme: 'summer',
-	    columns: [
+			columns: [
                 {text: 'STT', cellsrenderer: BACKEND.sttcolumnrender, width: 40, filterable: false},
-		{text: 'TITLE', datafield: 'name'},
-		{text: 'Phân Loại', datafield: 'type'},
-                {text: 'CÔNG CỤ', datafield: 'idCoppy', cellsalign: 'center', align: 'center', cellsrenderer: BACKEND.toolscolumnrender, width: 80, sortable: false, filterable: false},
+                {text: 'TITLE', datafield: 'name'},
+                {text: 'CÔNG CỤ', datafield: 'id_news', cellsalign: 'center', align: 'center', cellsrenderer: BACKEND.toolscolumnrender, width: 80, sortable: false, filterable: false},
             ],
             virtualmode: true,
             rendergridrows: function() {
@@ -141,7 +153,7 @@ var BACKEND = {
     },
     gridEdit: function(id) {
         //loadPopup(id, false);
-        window.location.href = '/backend/slide/add?id=' + id;
+        window.location.href = '/backend/newsevent/add/' + id;
     },
     setBc: function(id){
         $.ajax({
@@ -229,10 +241,19 @@ var BACKEND = {
                 alert('Có lỗi ! Không kết nối đến dữ liệu được.');
             });
 	},
-    
+    loadCat: function(){
+        $.ajax({
+                url: BACKEND.API_URL_CAT,
+                type: 'GET',
+                dataType: 'JSON',
+                data: {}
+            }).done(function(response) {
+                arrCat = response;                
+            })
+    },
 	desable: function(id){
         $.ajax({
-                url: BACKEND.AJAX_URL_UPDATE + '?id=' + id + '&st=off&field=status',
+                url: BACKEND.AJAX_URL_UPDATE + '?id=' + id + '&st=0&field=status',
                 type: 'GET',
                 dataType: 'JSON',
                 data: {}
@@ -249,7 +270,7 @@ var BACKEND = {
     },
 	enable: function(id){
         $.ajax({
-                url: BACKEND.AJAX_URL_UPDATE + '?id=' + id + '&st=on&field=status',
+                url: BACKEND.AJAX_URL_UPDATE + '?id=' + id + '&st=1&field=status',
                 type: 'GET',
                 dataType: 'JSON',
                 data: {}

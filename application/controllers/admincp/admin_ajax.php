@@ -862,48 +862,20 @@ class Admin_Ajax extends MY_Controller {
         $this->load->library('form_validation');
         $response['code'] = -1;
         $response['redirect'] = '/backend/newsevent/index';
-        $response['message']['title'] = '';
-        $response['message']['description'] = '';
-        $response['message']['content'] = '';
-        $response['message']['url_news'] = '';
-        $response['message']['game_name'] = '';
-        $response['message']['cat_name'] = '';
+       
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $arrParam = $this->input->post();
-            $this->form_validation->set_rules('title', 'Tiêu đề', 'trim|required');
-            $this->form_validation->set_rules('game_name', 'Tên game', 'trim|required');
-            $this->form_validation->set_rules('cat_name', 'Tên category', 'trim|required');
-            //$this->form_validation->set_rules('url_news', 'Url_news', 'trim|required');
-            $this->form_validation->set_rules('description', 'Mô tả', 'trim|required');
-            //$this->form_validation->set_rules('content', 'Nội dung', 'trim|required');
-            $this->form_validation->set_message('required', 'Không được rỗng');
+            $this->form_validation->set_rules('name', 'Tiêu đề', 'trim|required');
+            $this->form_validation->set_rules('image', 'Hình', 'trim|required');
+            $this->form_validation->set_rules('content', 'Nội dung', 'trim|required');
             if ($this->form_validation->run() == TRUE) {
-                $Id = $arrParam['id'];
-                $this->m_backend->_table = 'game';
-                $game = $this->m_backend->jqxGetgamename($this->security->xss_clean($arrParam['game_name']));
-                $Params['id_game'] = $game['id_game'];
-
-                $this->m_backend->_table = 'news_category';
-                $game = $this->m_backend->jqxGetcatname($this->security->xss_clean($arrParam['cat_name']));
-                $Params['id_category'] = $game['id_category'];
-
-                $arrParam['title'] = htmlspecialchars($this->security->xss_clean($arrParam['title']));
-                $this->m_backend->_table = "news";
-
-                $Params['title'] = $this->security->xss_clean($arrParam['title']);
-                $Params['description'] = $this->security->xss_clean($arrParam['description']);
+                
+                $Params['name'] = $this->security->xss_clean($arrParam['title']);
                 $Params['content'] = $arrParam['content'];
-                $Params['url_news'] = $this->security->xss_clean($arrParam['url_news']);
-                $Params['type'] = $this->security->xss_clean($arrParam['type_name']);
-                $Params['featured_home'] = '1';
-                if ($this->security->xss_clean($arrParam['featured_home']) == 'Block')
-                    $Params['featured_home'] = '0';
-                $Params['order_home'] = '1';
-                if ($this->security->xss_clean($arrParam['order_home']) == 'Block')
-                    $Params['order_home'] = '0';
-                $Params['status'] = $this->security->xss_clean($arrParam['status']);
-
+                $Params['image'] = $arrParam['image'];
+                
+              
                 if (empty($Id) === FALSE) {
                     $Params['update_time'] = date('Y-m-d H:i:s');
                     $rs = $this->m_backend->jqxUpdatenews($Id, $Params);
@@ -912,32 +884,13 @@ class Admin_Ajax extends MY_Controller {
                     $Params['create_time'] = date('Y-m-d H:i:s');
                     $id_news = $this->m_backend->jqxInsertId('news', $Params);
                     $response['message']['id_news'] = $id_news;
-                    if (empty($id_game) === FALSE) {
-                        $_SESSION['KCFINDER']['uploadURL'] = '../../../assets/images/news/game' . $Params['id_game'];
-                        $_SESSION['KCFINDER']['uploadDir'] = '../../../assets/images/news/game' . $Params['id_game'];
-
-                        $path = FCPATH . 'assets/images/news/game' . $Params['id_game'] . '/images';
-                        if (!file_exists($path)) {
-                            @mkdir($path, 0777, TRUE);
-                            $this->load->library('WriteFile');
-                            $fileName = $path . '/index.html';
-                            $fileContent = "<html>\n";
-                            $fileContent .= "<body bgcolor='#FFFFFF'></body>\n";
-                            $fileContent .="</html>";
-                            $this->writefile->_write_file($fileName, $fileContent);
-                        }
-                    }
                 }
                 $response['code'] = 0;
             } else {
                 $response['code'] = 1;
-                $response['message']['title'] = $this->form_validation->error('title', ' ', ' ');
+                $response['message']['name'] = $this->form_validation->error('title', ' ', ' ');
                 $response['message']['description'] = $this->form_validation->error('description', ' ', ' ');
-                //$response['message']['content'] = $this->form_validation->error('content', ' ', ' ');
-                //$response['message']['url_news'] = $this->form_validation->error('url_news', ' ', ' ');
-                $response['message']['status'] = $this->form_validation->error('status', ' ', ' ');
-                $response['message']['game_name'] = $this->form_validation->error('game_name', ' ', ' ');
-                $response['message']['cat_name'] = $this->form_validation->error('cat_name', ' ', ' ');
+                
             }
         }
         end:

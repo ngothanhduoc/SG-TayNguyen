@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="description" content="Admin Panel" />
 <meta name="author" content="mecorp.vn" />
-<title>Me | AdminCP</title>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Me | AdminCP</title>
+<title>CMS | AdminCP</title>
 
 <link rel="stylesheet" href="/public/admin/assets/css/style.default.css" type="text/css" />
 <script type="text/javascript" src="/public/admin/assets/js/plugins/jquery-1.8.3.min.js"></script>

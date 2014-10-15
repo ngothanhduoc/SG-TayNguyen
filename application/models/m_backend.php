@@ -398,4 +398,7 @@ class M_backend extends MY_Model {
             return true;
         return false;
     }
+    function update_data($table, $data, $where){
+         $this->db_slave->update($table, $data, $where);
+    }
 }

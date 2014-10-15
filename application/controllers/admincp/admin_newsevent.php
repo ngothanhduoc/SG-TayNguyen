@@ -19,20 +19,12 @@ class Admin_newsevent extends MY_Controller {
         $controllerName = $this->router->fetch_class();
         $actionName = $this->router->fetch_method();
         $_SESSION[$controllerName . '::' . $actionName . '::newsevent'] = time();
-        
+
         $this->load->model('m_backend');
-        $result = $this->m_backend->jqxGets('game');
-        $arr = array();
-        foreach ($result as $val){
-            $arr[$val['id_game']] = $val['full_name'];
-        }
-        $data['game'] = $arr;
-        
-        $result = $this->m_backend->jqxGets('news_category');
-        foreach ($result as $val){
-            $arr[$val['id_category']] = $val['title'];
-        }
-        $data['news_category'] = $arr;
+
+        $result = $this->m_backend->jqxGets('news');
+
+        $data['news_category'] = $result;
         $this->template->write_view('content', 'admincp/newsevent/index', $data);
         $this->template->render();
     }
@@ -41,88 +33,30 @@ class Admin_newsevent extends MY_Controller {
         $id = $this->check_security($id);
         $data = array();
         $this->load->model('m_backend');
-        $str='';
-        $gameUser = $this->m_backend->jqxGetId('user_has_game', 'id_admin', $this->session->userdata['user_info']['id_admin']);
-        if(empty($gameUser) === FALSE){
-            $arr = array();
-            foreach($gameUser as $val){
-                $arr[] = $val['id_game'];
-            }
-            $str = implode(',', $arr);
-        }else{
-            $str = 0;
-        }
+        $str = '';
         
+
         $this->m_backend->datatables_config = array(
-            "table" => 'game',
-            "where" => "where id_game IN (".$str.")",
-            //"order_by" => "ORDER BY id_news DESC",
+            "table" => 'news',
         );
+        $data = $this->m_backend->jqxBinding();
 
-        $listgame = $this->m_backend->jqxBinding();
-
-        $arrr = array();
-
-        foreach ($listgame['rows'] as $v) {
-            $arrr[$v['id_game']] = $v['full_name'];
-        }
-        $data['game'] = $arrr;
-        
-        $this->m_backend->datatables_config = array(
-            "table" => 'news_category',
-                //"where" => "where `status` != 0",
-                //"order_by" => "ORDER BY id DESC",
-        );
-        $list = $this->m_backend->jqxBinding();
-        $arrr = array();
-        foreach ($list['rows'] as $v) {
-            $arrr[$v['id_category']] = $v['title'];
-        }
-        $data['cat'] = $arrr;
-        
-        $data['gameIndex']=''; $data['catIndex']=''; $data['featured']='Active'; $data['order']='Active'; $data['type']="news";
-        if ($id != 0 && is_numeric($id)) {
-            $this->m_backend->datatables_config = array(
-                "table" => 'news',
-                "where" => "where id_game IN (".$str.")",
-                //"order_by" => "ORDER BY id_news DESC",
-            );
-
-            $listnews = $this->m_backend->jqxBinding();
-            $arr = array();
-            if (empty($listnews) === FALSE) {
-                foreach ($listnews['rows'] as $val) {
-                    $arr[] = $val['id_news'];
-                }
-            }
-            if (in_array($id, $arr)) {
-                $info = $this->m_backend->jqxGet('news', 'id_news', $id);
-                $data['data'] = $info;
-
-                if (empty($data['data'])) {
-                    return Redirect::to('backend/newsevent/index');
-                }
-                $data['featured']='Active';
-                if($data['data']['featured_home']==0)
-                    $data['featured']='Block';
-                
-                $data['order']='Active';
-                if($data['data']['order_home']==0)
-                    $data['order']='Block';
-                
-                $data['type']='news';
-                if($data['data']['type']=='event')
-                    $data['type']='event';
-
-                $this->m_backend->_table = 'game';
-                $infoGame = $this->m_backend->jqxGetgame($data['data']['id_game']);
-                $data['gameIndex'] = $infoGame['full_name'];
-                $this->m_backend->_table = 'news_category';
-                $infoCat = $this->m_backend->jqxGetcategory($data['data']['id_category']);
-                $data['catIndex'] = $infoCat['title'];
+        $post = $this->input->post();
+        $id_news = $post['id'];
+        unset($post['id']);
+        if (!empty($post)) {
+           
+            if (empty($id_news) === FALSE) {
+               $rs = $this->m_backend->update_data("news", $post, array('id_news'=>$id_news));
+            } else {
+               $id_news = $this->m_backend->jqxInsertId('news', $post);
             }
         }
-
+        if ($id !== FALSE) {
+            $this->m_backend->_table = 'news';
+            $this->m_backend->_key = "id_news";
+            $data['data'] = $this->m_backend->get_by_id($id);            
+        }
         $this->template->write_view('content', 'admincp/newsevent/add', $data);
         $this->template->render();
     }
