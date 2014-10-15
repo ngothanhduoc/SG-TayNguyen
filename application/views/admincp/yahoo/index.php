@@ -1,8 +1,8 @@
-<script type="text/javascript" src="/public/admin/assets/js/backend/backend.home.js"></script>
+<script type="text/javascript" src="/public/admin/assets/js/backend/backend.yahoo.js"></script>
 
 
 <div class="pageheader notab">
-	<h1 class="pagetitle">List Slide at Home Page</h1>
+	<h1 class="pagetitle">List Yahoo Nick</h1>
 	<span class="pagedesc"></span>
 	
 </div><!--pageheader-->
@@ -10,6 +10,6 @@
 	<div id="jqxgrid"></div>				
 </div><!--contentwrapper-->
 <script type="text/javascript">
-	setActiveMenu('slide');
-        setActiveSubMenu('backend-slide-index');
+	setActiveMenu('yahoo');
+        setActiveSubMenu('backend-yahoo-index');
 </script>

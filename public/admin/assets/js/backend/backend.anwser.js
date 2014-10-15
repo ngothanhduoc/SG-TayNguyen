@@ -5,9 +5,9 @@ $(document).ready(function() {
 
 
 var BACKEND = {
-    API_URL_LIST: '/backend/list/product',
-    AJAX_URL_DELETE: '/backend/ajax/delete/admin_product/index/product/id_product',
-    AJAX_URL_UPDATE: '/backend/ajax/updatestatus/admin_product/index/product/id_product',
+    API_URL_LIST: '/backend/list/anwser',
+    AJAX_URL_DELETE: '/backend/ajax/delete/admin_anw/index/anwser/id_anwser',
+    AJAX_URL_UPDATE: '/backend/ajax/updatestatus/admin_anwser/index/anwser/id_anwser',
     
     OBJ_GRID: null,
     dataAdapter: function() {
@@ -15,11 +15,10 @@ var BACKEND = {
         var source = {
             datatype: "jsonp",
             datafields: [
-                {name: 'id_product', type: 'int'},
+                {name: 'id_anwser', type: 'int'},
+                {name: 'title', type: 'string'},
                 {name: 'name', type: 'string'},
-                {name: 'status', type: 'string'},
-                {name: 'created_by', type: 'int'},
-               
+                {name: 'create_time', type: 'string'},
             ],
             url: BACKEND.API_URL_LIST,
             sort: function() {
@@ -37,8 +36,8 @@ var BACKEND = {
                 var j = p*s;
 
                 for (var i = j; i < records.length; i++) {
-                    records[i].idCoppy = records[i].id_product;
-                    records[i].idStatus = records[i].id_product + ',' + records[i].status;
+                    records[i].idCoppy = records[i].id_anwser;
+                    records[i].idStatus = records[i].id_anwser + ',' + records[i].status;
 				
                 };
 				
@@ -101,9 +100,9 @@ var BACKEND = {
             //theme: 'summer',
 	    columns: [
                 {text: 'STT', cellsrenderer: BACKEND.sttcolumnrender, width: 40, filterable: false},
-		{text: 'TITLE', datafield: 'name'},
-//		{text: 'CONTENT', datafield: 'description'},
-		{text: 'STATUS', datafield: 'idStatus', cellsrenderer: BACKEND.statuscolumnrender, width: 60,filterable: false, sortable: false},
+		{text: 'TITLE', datafield: 'title'},
+		{text: 'Tên người gửi', datafield: 'name'},
+		{text: 'Thời gian', datafield: 'create_time'},
                 {text: 'CÔNG CỤ', datafield: 'idCoppy', cellsalign: 'center', align: 'center', cellsrenderer: BACKEND.toolscolumnrender, width: 80, sortable: false, filterable: false},
             ],
             virtualmode: true,
@@ -143,7 +142,7 @@ var BACKEND = {
     },
     gridEdit: function(id) {
         //loadPopup(id, false);
-        window.location.href = '/backend/product/add?id=' + id;
+        window.location.href = '/backend/anw/edit?id=' + id;
     },
     setBc: function(id){
         $.ajax({

@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 var BACKEND = {
     API_URL_LIST: '/backend/list/images',
-    AJAX_URL_DELETE: '/backend/ajax/delete/admin_slide/index/slide/id_slide',
+    AJAX_URL_DELETE: '/backend/ajax/delete/admin_slide/index/images/id_slide',
     AJAX_URL_UPDATE: '/backend/ajax/updatestatus/admin_slide/index/slide/id_slide',
     
     OBJ_GRID: null,
@@ -52,7 +52,7 @@ var BACKEND = {
         return '<div style="overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: left; margin:4px 2px 0px 4px;">' + index + '</div>';
     },
     toolscolumnrender: function(row, datafield, value) {
-        return '<div class="grid-tools"><a href="javascript:void(0)" onclick="BACKEND.gridEdit(' + value + ');return false;" class="grid-tools"><span class="ui-icon ui-icon-pencil"></span></a></div>';
+        return '<div class="grid-tools"><a href="javascript:void(0)" onclick="BACKEND.gridEdit(' + value + ');return false;" class="grid-tools"><span class="ui-icon ui-icon-pencil"></span></a><a href="javascript:void(0)" onclick="BACKEND.gridDelete(' + value + ');return false;"><span class="ui-icon ui-icon-trash"></span></a></div>';
     },
     rankingcolumnrender: function(row, datafield, value) {
         var res = value.split(",");

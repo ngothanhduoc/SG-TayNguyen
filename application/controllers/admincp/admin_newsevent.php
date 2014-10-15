@@ -34,7 +34,7 @@ class Admin_newsevent extends MY_Controller {
         $data = array();
         $this->load->model('m_backend');
         $str = '';
-        
+
 
         $this->m_backend->datatables_config = array(
             "table" => 'news',
@@ -45,17 +45,19 @@ class Admin_newsevent extends MY_Controller {
         $id_news = $post['id'];
         unset($post['id']);
         if (!empty($post)) {
-           
+
             if (empty($id_news) === FALSE) {
-               $rs = $this->m_backend->update_data("news", $post, array('id_news'=>$id_news));
+                $rs = $this->m_backend->update_data("news", $post, array('id_news' => $id_news));
+                redirect("/backend/newsevent/index");
             } else {
-               $id_news = $this->m_backend->jqxInsertId('news', $post);
+                $id_news = $this->m_backend->jqxInsertId('news', $post);
+                redirect("/backend/newsevent/index");
             }
         }
         if ($id !== FALSE) {
             $this->m_backend->_table = 'news';
             $this->m_backend->_key = "id_news";
-            $data['data'] = $this->m_backend->get_by_id($id);            
+            $data['data'] = $this->m_backend->get_by_id($id);
         }
         $this->template->write_view('content', 'admincp/newsevent/add', $data);
         $this->template->render();
@@ -112,4 +114,3 @@ class Admin_newsevent extends MY_Controller {
     }
 
 }
-

@@ -3,7 +3,7 @@ ini_set("display_errors", '1');
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Admin_slide extends MY_Controller {
+class Admin_yahoo extends MY_Controller {
 
     protected $_arrParam;
 
@@ -19,9 +19,9 @@ class Admin_slide extends MY_Controller {
         $data = array();
         $controllerName = $this->router->fetch_class();
         $actionName = $this->router->fetch_method();
-        $_SESSION[$controllerName . '::' . $actionName . '::images'] = time();
+        $_SESSION[$controllerName . '::' . $actionName . '::yahoo'] = time();
 
-        $this->template->write_view('content', 'admincp/home/index', $data);
+        $this->template->write_view('content', 'admincp/yahoo/index', $data);
         $this->template->render();
     }
     function add($id = 0){
@@ -47,7 +47,7 @@ class Admin_slide extends MY_Controller {
                 redirect("/backend/slide/index");
             }
         }
-	$this->template->write_view('content', 'admincp/home/add', $data);
+	$this->template->write_view('content', 'admincp/yahoo/add', $data);
         $this->template->render();        
     }
 }

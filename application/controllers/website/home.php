@@ -58,7 +58,19 @@ class Home extends CI_Controller {
 
     public function anw() {
         $data = $this->data;
+        $this->m_home->_table = "anwser";
+        $data['anwser'] = $this->m_home->get_table();
+        
         $this->template->write_view('content', 'website/view_anw', $data);
+        $this->template->render();
+    }
+    public function anw_detail($params){
+        $data = $this->data;
+        $id = get_id_url($params);
+        $this->m_home->_table = "anwser";
+        $this->m_home->_key = "id_anwser";
+        $data['db'] = $this->m_home->get_by_id($id);
+        $this->template->write_view('content', 'website/view_detail_anwser', $data);
         $this->template->render();
     }
 
@@ -89,6 +101,17 @@ class Home extends CI_Controller {
         $this->m_home->_key = "id_news";
         $data['data_news'] = $this->m_home->get_by_id($id);
         $this->template->write_view('content', 'website/view_detail_news', $data);
+        $this->template->render();
+    }
+    public function anw_put(){
+        $data = $this->data;
+        $this->m_home->_table = "anwser";
+        $post = $this->input->post(NULL, TRUE);
+        $id = $this->m_home->insert($post);
+        if(!empty($id)){
+            $data['thank'] = 'Cám ơn quý khách đã đặt câu hỏi! Chúng tôi sẽ sớm có phản hồi!';
+        }
+        $this->template->write_view('content', 'website/view_anw_put', $data);
         $this->template->render();
     }
 }

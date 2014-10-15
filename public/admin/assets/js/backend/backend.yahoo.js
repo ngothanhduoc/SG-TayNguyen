@@ -5,9 +5,9 @@ $(document).ready(function() {
 
 
 var BACKEND = {
-    API_URL_LIST: '/backend/list/product',
-    AJAX_URL_DELETE: '/backend/ajax/delete/admin_product/index/product/id_product',
-    AJAX_URL_UPDATE: '/backend/ajax/updatestatus/admin_product/index/product/id_product',
+    API_URL_LIST: '/backend/list/contact_yahoo',
+    AJAX_URL_DELETE: '/backend/ajax/delete/admin_yahoo/index/contact_yahoo/id_yahoo',
+    AJAX_URL_UPDATE: '/backend/ajax/updatestatus/admin_yahoo/index/yahoo/id_yahoo',
     
     OBJ_GRID: null,
     dataAdapter: function() {
@@ -15,10 +15,9 @@ var BACKEND = {
         var source = {
             datatype: "jsonp",
             datafields: [
-                {name: 'id_product', type: 'int'},
-                {name: 'name', type: 'string'},
-                {name: 'status', type: 'string'},
-                {name: 'created_by', type: 'int'},
+                {name: 'id_yahoo', type: 'int'},
+                {name: 'nick', type: 'string'},
+                
                
             ],
             url: BACKEND.API_URL_LIST,
@@ -37,8 +36,8 @@ var BACKEND = {
                 var j = p*s;
 
                 for (var i = j; i < records.length; i++) {
-                    records[i].idCoppy = records[i].id_product;
-                    records[i].idStatus = records[i].id_product + ',' + records[i].status;
+                    records[i].idCoppy = records[i].id_yahoo;
+                    records[i].idStatus = records[i].id_yahoo + ',' + records[i].status;
 				
                 };
 				
@@ -101,9 +100,8 @@ var BACKEND = {
             //theme: 'summer',
 	    columns: [
                 {text: 'STT', cellsrenderer: BACKEND.sttcolumnrender, width: 40, filterable: false},
-		{text: 'TITLE', datafield: 'name'},
-//		{text: 'CONTENT', datafield: 'description'},
-		{text: 'STATUS', datafield: 'idStatus', cellsrenderer: BACKEND.statuscolumnrender, width: 60,filterable: false, sortable: false},
+		{text: 'TITLE', datafield: 'nick'},
+		
                 {text: 'CÔNG CỤ', datafield: 'idCoppy', cellsalign: 'center', align: 'center', cellsrenderer: BACKEND.toolscolumnrender, width: 80, sortable: false, filterable: false},
             ],
             virtualmode: true,
@@ -143,7 +141,7 @@ var BACKEND = {
     },
     gridEdit: function(id) {
         //loadPopup(id, false);
-        window.location.href = '/backend/product/add?id=' + id;
+        window.location.href = '/backend/yahoo/add?id=' + id;
     },
     setBc: function(id){
         $.ajax({

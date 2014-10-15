@@ -49,7 +49,8 @@ $route['tu-van-hoi-dap.html']= "website/home/anw";
 $route['ajax_product']= "website/home/ajax_product";
 $route['san-pham/(:any)']= "website/home/detail_product/$1";
 $route['tin-tuc-su-kien/(:any)']= "website/home/detail_news/$1";
-
+$route['tu-van-hoi-dap/(:any)']= "website/home/anw_detail/$1";
+$route['tu-van-hoi-dap/dat-cau-hoi.html']= "website/home/anw_put/";
 
 /*--------End frontend------- */
 /*--------route admincp------------------------------*/
@@ -130,5 +131,10 @@ $route['backend/contact/detail'] = "admincp/admin_contact/detail";
 $route['backend/ajax/contact_count'] = "admincp/admin_ajax/contact_count";
 $route['backend/slide/index'] = "admincp/admin_slide/index";
 $route['backend/slide/add'] = "admincp/admin_slide/add";
+$route['backend/yahoo/index'] = "admincp/admin_yahoo/index";
+$route['backend/yahoo/add'] = "admincp/admin_yahoo/add";
+$route['backend/anw/index'] = "admincp/admin_anw/index";
+$route['backend/anw/edit'] = "admincp/admin_anw/edit";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

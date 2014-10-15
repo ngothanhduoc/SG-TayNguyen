@@ -5,7 +5,7 @@ $(document).ready(function() {
 	
     CKEDITOR.replace('fulltext');
 	 //-- init textbox nha phat hanh --------------------------------------------
-    BACKEND.init();
+//    BACKEND.init();
 	
 });
 

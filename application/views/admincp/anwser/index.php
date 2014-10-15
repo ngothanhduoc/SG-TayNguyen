@@ -1,12 +1,5 @@
 
-
-<script type="text/javascript">
-    setActiveMenu('newsevent');
-    setActiveSubMenu('backend-newsevent-index');
-	
-	
-</script>
-<script type="text/javascript" src="/public/admin/assets/js/backend/backend.newsevent.js"></script>
+<script type="text/javascript" src="/public/admin/assets/js/backend/backend.anwser.js"></script>
 
 
 <div class="pageheader notab">
@@ -17,3 +10,11 @@
 <div id="contentwrapper" class="contentwrapper lineheight21">
 	<div id="jqxgrid"></div>				
 </div><!--contentwrapper-->
+
+<script type="text/javascript">
+    setActiveMenu('anw');
+    setActiveSubMenu('backend-anw-index');
+	
+   
+	
+</script>

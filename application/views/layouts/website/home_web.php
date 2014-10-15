@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
-        <title>Portal Template</title>
+        <title>Công Ty TNHH SÀI GÒN - TÂY NGUYÊN</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <!--[if lt IE 9]>
@@ -34,13 +34,28 @@
 
             <!--left-->
             <div class="col-sm-3">
-
+                <?php 
+                    $active = $_SERVER['REQUEST_URI']; 
+                    if(strstr($active, "gioi-thieu") !== FALSE)
+                        $gt = "active";
+                    if($active == "/trang-chu.html")
+                        @$trang_chu = "active";
+                    if(strstr($active, "san-pham") !== FALSE)
+                        @$san_pham = "active";
+                    
+                    if(strstr($active, "tin-tuc-su-kien") !== FALSE)
+                        @$tin_tuc = "active";
+                    
+                    if(strstr($active, "tu-van-hoi-dap") !== FALSE)
+                        @$hoi_dap = "active";
+                    
+                ?>
                 <div class="panel panel-default">
-                    <a href="/trang-chu.html"><div class="panel-heading menu active">Trang Chủ</div></a>
-                    <a href="/gioi-thieu.html"><div class="panel-heading menu">Giới Thiệu</div></a>
-                    <a href="/san-pham.html"><div class="panel-heading menu">Sản Phẩm</div></a>
-                    <a href="/tin-tuc-su-kien.html"><div class="panel-heading menu">Tin Tức - Sự Kiện</div></a>
-                    <a href="/tu-van-hoi-dap.html"><div class="panel-heading menu">Tư Vấn - Hỏi Đáp</div></a>
+                    <a href="/trang-chu.html"><div class="panel-heading menu <?php echo @$trang_chu ?>">Trang Chủ</div></a>
+                    <a href="/gioi-thieu.html"><div class="panel-heading menu <?php echo @$gt ?>">Giới Thiệu</div></a>
+                    <a href="/san-pham.html"><div class="panel-heading menu <?php echo @$san_pham ?>"  >Sản Phẩm</div></a>
+                    <a href="/tin-tuc-su-kien.html"><div class="panel-heading menu <?php echo @$tin_tuc ?>">Tin Tức - Sự Kiện</div></a>
+                    <a href="/tu-van-hoi-dap.html"><div class="panel-heading menu <?php echo @$hoi_dap ?>">Tư Vấn - Hỏi Đáp</div></a>
 
                 </div>
                 <hr>

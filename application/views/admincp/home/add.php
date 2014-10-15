@@ -1,3 +1,7 @@
+<script type="text/javascript">
+    setActiveMenu('slide');
+    setActiveSubMenu('backend-slide-add');
+</script>
 <script type="text/javascript" src="/public/admin/editor/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="/public/admin/assets/js/backend/backend.home.input.js"></script>
 <style>
@@ -35,10 +39,16 @@ div.uploader {
 		</p>
 				
 		<p>
-                    <label for="home_image">Slide Image (980px x 510px)</label>
+                    <label for="home_image">Phân Loại</label>
                     <span class="field">
-                        <input type="radio" name="slide"value="company" /> Hình ảnh của Công Ty <br/>
-                        <input type="radio" name="slide" value="partner" /> Hình ảnh của Đối Tác
+                        <?php 
+                            if(@$data['name'] == 'company')
+                                $check_1 = 'checked="checked"';
+                            if(@$data['name'] == 'partner')
+                                $check_2 = 'checked="checked"';
+                        ?>
+                        <input type="radio" checked="" <?php echo @$check_1 ?> name="type"value="company" /> Hình ảnh của Công Ty <br/>
+                        <input type="radio" <?php echo @$check_2 ?> name="type" value="partner" /> Hình ảnh của Đối Tác
                     </span>
 		</p>
                 
@@ -46,7 +56,14 @@ div.uploader {
                     <label for="home_image">Slide Image (200px x 200px)</label>
                     <span class="field">
                         <input type="text" required="" placeholder="Click vào để chọn hình" id="home_image" name="image" class="mediuminput" value="<?php echo @$data['image']?>" onclick="openKCFinderByPath('#home_image', 'images')" readonly>
-                    </span>
+                        <br/>
+                        <br/>
+                        <?php 
+                            if(!empty($data['image']))
+                                echo '<img src="'.@$data['image'].'" width="200px" />';
+                            
+                        ?>
+                    </span> 
 		</p>
 				
 		<p class="stdformbutton">
@@ -57,7 +74,3 @@ div.uploader {
 	</form>				
 </div><!--contentwrapper-->
 
-<script type="text/javascript">
-    setActiveMenu('home');
-    setActiveSubMenu('backend-home-add');
-</script>
