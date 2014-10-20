@@ -136,5 +136,8 @@ $route['backend/yahoo/add'] = "admincp/admin_yahoo/add";
 $route['backend/anw/index'] = "admincp/admin_anw/index";
 $route['backend/anw/edit'] = "admincp/admin_anw/edit";
 
+$route['backend/group_product/index'] = "admincp/admin_product/index_group_product";
+$route['backend/group_product/add'] = "admincp/admin_product/add_group_product";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

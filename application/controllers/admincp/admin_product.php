@@ -20,7 +20,12 @@ class Admin_product extends MY_Controller {
         $controllerName = $this->router->fetch_class();
         $actionName = $this->router->fetch_method();
         $_SESSION[$controllerName . '::' . $actionName . '::product'] = time();
-
+        $this->m_backend->_table = 'group_product';
+        $group = $this->m_backend->get_table();
+        foreach ($group as $key => $value) {
+            $data['group'][]  = $value['name'];
+        }   
+        echo json_encode($data['group']);
         $this->template->write_view('content', 'admincp/product/index', $data);
         $this->template->render();
     }
@@ -36,6 +41,42 @@ class Admin_product extends MY_Controller {
         }
         
 	$this->template->write_view('content', 'admincp/product/add', $data);
+        $this->template->render();        
+    }
+    public function index_group_product(){
+        $data = array();
+        $controllerName = $this->router->fetch_class();
+        $actionName = $this->router->fetch_method();
+        $_SESSION[$controllerName . '::' . $actionName . '::product'] = time();
+
+        $this->template->write_view('content', 'admincp/product/index_group_product', $data);
+        $this->template->render();
+    }
+    function add_group_product(){
+        $data = array();
+	$this->load->model('m_backend');
+        $post = $this->input->post(NULL,TRUE);
+        $id_group_product = $post['id'];
+        unset($post['id']);
+        if (!empty($post)) {
+
+            if (empty($id_group_product) === FALSE) {
+                $rs = $this->m_backend->update_data("group_product", $post, array('id_group_product' => $id_group_product));
+                redirect("/backend/group_product/index");
+            } else {
+                $group_product = $this->m_backend->jqxInsertId('group_product', $post);
+                redirect("/backend/group_product/index");
+            }
+        }
+        $id = $this->input->get('id', TRUE);
+        if(isset($id) && is_numeric($id)){
+            $rs = $this->m_backend->jqxGet('group_product','id_group_product',$id);
+            if(empty($rs) === FALSE){
+                $data['data'] = $rs;
+            }
+        }
+        
+	$this->template->write_view('content', 'admincp/product/add_group_product', $data);
         $this->template->render();        
     }
 }

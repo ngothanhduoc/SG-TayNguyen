@@ -34,7 +34,7 @@ class Admin_slide extends MY_Controller {
                 $data['data'] = $rs;
             }
         }
-        $post = $this->input->post();        print_r($post);
+        $post = $this->input->post();     
         $id_slide = $post['id'];
         unset($post['id']);
         if (!empty($post)) {
