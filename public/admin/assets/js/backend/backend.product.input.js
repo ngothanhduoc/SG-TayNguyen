@@ -6,6 +6,7 @@ $(document).ready(function() {
     CKEDITOR.replace('fulltext');
 	 //-- init textbox nha phat hanh --------------------------------------------
     BACKEND.init();
+    BACKEND.initDropdownlistType(CAT, CAT_INDEX);
 	
 });
 
@@ -67,13 +68,13 @@ var BACKEND = {
             $("#jqxDropdownlist").jqxDropDownList('checkItem', arrPlatform[i]);
         }
     },
-    initDropdownlistType: function(data) {
-        var source = ["Game mới", "Game Hot", "Nạp nhiều"];
-        $("#jqxDropdownlistType").jqxDropDownList({checkboxes: true, source: source, selectedIndex: 1, width: '100%', height: '25', theme: THEME, placeHolder: "Vui lòng chọn"});
+    initDropdownlistType: function(data, index) {
+        var source = data;
+        $("#jqxDropdownlistType").jqxDropDownList({source: source, selectedIndex: 1, width: '75%', height: '25', theme: 'office', placeHolder: "Vui lòng chọn"});
 
-        var arr = data.split(',');
-        for (var i = 0; i < arr.length; i++) {
-            $("#jqxDropdownlistType").jqxDropDownList('checkItem', arr[i]);
+        //var arr = data.split(',');
+        if(index != ''){
+            $("#jqxDropdownlistType").jqxDropDownList('selectItem', index);
         }
     },
 	initDropdownlistSmsCard: function(data) {

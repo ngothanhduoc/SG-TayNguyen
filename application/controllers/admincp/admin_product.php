@@ -20,12 +20,7 @@ class Admin_product extends MY_Controller {
         $controllerName = $this->router->fetch_class();
         $actionName = $this->router->fetch_method();
         $_SESSION[$controllerName . '::' . $actionName . '::product'] = time();
-        $this->m_backend->_table = 'group_product';
-        $group = $this->m_backend->get_table();
-        foreach ($group as $key => $value) {
-            $data['group'][]  = $value['name'];
-        }   
-        echo json_encode($data['group']);
+        
         $this->template->write_view('content', 'admincp/product/index', $data);
         $this->template->render();
     }
@@ -38,7 +33,15 @@ class Admin_product extends MY_Controller {
             if(empty($rs) === FALSE){
                 $data['data'] = $rs;
             }
-        }
+        } 
+        $this->m_backend->_table = 'group_product';
+        $group = $this->m_backend->get_table();
+        foreach ($group as $key => $value) {
+            $data['group'][]  = $value['name'];
+            if($rs['id_group_product'] == $value['id_group_product']){
+                $data['group_name'] = $value['name'];
+            }
+        }   
         
 	$this->template->write_view('content', 'admincp/product/add', $data);
         $this->template->render();        

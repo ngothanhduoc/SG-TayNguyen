@@ -1157,7 +1157,12 @@ class Admin_Ajax extends MY_Controller {
 //                $Params['image_big'] = $arrParam['image_big'];
                 $Params['name'] = $arrParam['name'];
                 $Params['description'] = $arrParam['description'];
-
+                
+                $this->m_backend->_table = 'group_product';
+                $this->m_backend->_key = 'name';
+                $game = $this->m_backend->get_by_id($this->security->xss_clean($arrParam['type_name']));
+                $Params['id_group_product'] = $game['id_group_product'];
+                
                 if (empty($Id) === FALSE && is_numeric($Id)) {
                     $this->m_backend->jqxUpdate('product', 'id_product', $Id, $Params);
                 } else

@@ -68,5 +68,5 @@
 
 <script>
     var CAT = <?php echo json_encode(@$group) ?>;
-    var CAT_INDEX = '<?php echo @$catIndex ?>';
+    var CAT_INDEX = '<?php echo @$group_name ?>';
 </script>
